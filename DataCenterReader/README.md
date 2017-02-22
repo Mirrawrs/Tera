@@ -5,7 +5,7 @@ Decrypts, unpacks and deserializes the Data Center.
 ```csharp
 var dataCenterPath = @"C:\Users\Public\Games\En Masse Entertainment\TERA\Client\S1Game\S1Data\DataCenter_Final_USA.dat";
 var gamePath = @"C:\Users\Public\Games\En Masse Entertainment\TERA\Client\Binaries\TERA.exe";
-var dataCenter = await DataCenter.Load(dataCenterPath, gamePath);
+var dataCenter = await DataCenter.Load(dataCenterPath, new GameClientAnalyzer(gamePath));
 ```
 
 The Data Center is essentially a polytree in which vertices are represented by elements. As such, it can be queried to retrieve data.

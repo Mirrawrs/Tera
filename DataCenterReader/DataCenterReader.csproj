@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <RootNamespace>Tera.Analytics</RootNamespace>
+    <AssemblyName>DataCenterReader</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lotus.Serialization" Version="1.0.0-alpha" />
+    <PackageReference Include="System.ValueTuple" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GameClientAnalyzer\GameClientAnalyzer.csproj" />
+  </ItemGroup>
+
+</Project>

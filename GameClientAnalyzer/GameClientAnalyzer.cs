@@ -15,10 +15,20 @@ namespace Tera.Analytics
         private readonly TaskCompletionSource<AnalysisResult> completionSource =
             new TaskCompletionSource<AnalysisResult>();
 
+        private readonly string gameClientPath;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GameClientAnalyzer" /> class.
+        /// </summary>
+        /// <param name="gameClientPath">The path for the game executable.</param>
+        public GameClientAnalyzer(string gameClientPath)
+        {
+            this.gameClientPath = gameClientPath;
+        }
+
         /// <summary>
         ///     Starts the game client, injects the current assembly and analyzes it.
         /// </summary>
-        /// <param name="gameClientPath">The path for the game executable.</param>
         /// <param name="token">
         ///     The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
         /// </param>
@@ -26,7 +36,7 @@ namespace Tera.Analytics
         ///     A task that represents the asynchronous analysis operation. The task's <see cref="Task{T}.Result" /> contains the
         ///     results of the analysis.
         /// </returns>
-        public Task<AnalysisResult> Analyze(string gameClientPath, CancellationToken token = default(CancellationToken))
+        public Task<AnalysisResult> Analyze(CancellationToken token = default(CancellationToken))
         {
             var channelName = default(string);
             RemoteHooking.IpcCreateServer(ref channelName, WellKnownObjectMode.Singleton, this);

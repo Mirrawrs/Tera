@@ -113,8 +113,8 @@ namespace Tera.Analytics
             string gamePath,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var analyzer = new GameClientAnalyzer();
-            var info = await analyzer.Analyze(gamePath, cancellationToken);
+            var analyzer = new GameClientAnalyzer(gamePath);
+            var info = await analyzer.Analyze(cancellationToken);
             return await Load(path, info.DataCenterKey, info.DataCenterIv, cancellationToken);
         }
 

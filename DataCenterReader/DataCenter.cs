@@ -100,7 +100,7 @@ namespace Tera.Analytics
         ///     Center.
         /// </summary>
         /// <param name="path">The path to the Data Center file.</param>
-        /// <param name="gamePath">The path to the game client.</param>
+        /// <param name="analyzer">The <see cref="GameClientAnalyzer"/> instance that will scan the client.</param>
         /// <param name="cancellationToken">
         ///     The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.
         /// </param>
@@ -110,10 +110,9 @@ namespace Tera.Analytics
         /// </returns>
         public static async Task<DataCenter> Load(
             string path,
-            string gamePath,
+            GameClientAnalyzer analyzer,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var analyzer = new GameClientAnalyzer(gamePath);
             var info = await analyzer.Analyze(cancellationToken);
             return await Load(path, info.DataCenterKey, info.DataCenterIv, cancellationToken);
         }

@@ -22,7 +22,7 @@ namespace Tera.EnMasse
         ///     Gets a list of realms.
         /// </summary>
         /// <returns>The list of realms.</returns>
-        public async Task<IList<IRealmInfo>> GetServerList()
+        public async Task<IReadOnlyList<IRealmInfo>> GetServerList()
         {
             var html = await Client.GetStringAsync("http://sls.service.enmasse.com:8080/servers/list.en");
             var serializer = new XmlSerializer(typeof(RealmList));

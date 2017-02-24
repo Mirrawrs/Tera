@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Newtonsoft.Json.Linq;
-using Tera.Interfaces;
 
 namespace Tera.EnMasse
 {

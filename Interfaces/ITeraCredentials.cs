@@ -1,4 +1,4 @@
-﻿namespace Tera.Interfaces
+﻿namespace Tera
 {
     /// <summary>
     ///     Represents the credentials required for a user to log on a realm.

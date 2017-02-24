@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;net462</TargetFrameworks>
-    <RootNamespace>Tera.Interfaces</RootNamespace>
+    <RootNamespace>Tera</RootNamespace>
   </PropertyGroup>
 
 </Project>

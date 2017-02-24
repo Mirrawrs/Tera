@@ -1,5 +1,3 @@
-using Tera.Interfaces;
-
 namespace Tera.EnMasse
 {
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace Tera.Interfaces
+﻿namespace Tera
 {
     /// <summary>
     ///     Represents the connection information for a realm.

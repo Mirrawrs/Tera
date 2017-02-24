@@ -1,5 +1,4 @@
 using System.Xml.Serialization;
-using Tera.Interfaces;
 
 namespace Tera.EnMasse
 {

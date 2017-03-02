@@ -13,7 +13,7 @@ namespace Tera.EnMasse
     /// <summary>
     ///     Exposes methods to obtain EnMasse's TERA realm list and authentication ticket.
     /// </summary>
-    public class EnMasseDataProvider
+    public class EnMasseDataProvider : IAuthProvider
     {
         private static readonly HttpClient Client = new HttpClient();
 
@@ -21,7 +21,7 @@ namespace Tera.EnMasse
         ///     Gets a list of realms.
         /// </summary>
         /// <returns>The list of realms.</returns>
-        public async Task<IReadOnlyList<IRealmInfo>> GetServerList()
+        public async Task<IReadOnlyList<IRealmInfo>> GetRealms()
         {
             var html = await Client.GetStringAsync("http://sls.service.enmasse.com:8080/servers/list.en");
             var serializer = new XmlSerializer(typeof(RealmList));
@@ -33,14 +33,15 @@ namespace Tera.EnMasse
         }
 
         /// <summary>
-        ///     Gets a one-time ticket used to log on a realm.
+        ///     Authenticates on the EnMasse server and gets a one-time ticket used to log on a realm.
         /// </summary>
-        /// <param name="credentials">The user's credentials.</param>
+        /// <param name="username">The user's name.</param>
+        /// <param name="password">The user's password.</param>
         /// <returns>The authentication ticket.</returns>
-        public async Task<string> GetTicket(ITeraCredentials credentials)
+        public async Task<string> Authenticate(string username, string password)
         {
             var csrfToken = await GetCsrfToken();
-            if (!await TryAuthenticate(csrfToken, credentials)) throw new Exception("Authentication error.");
+            if (!await TryAuthenticate(csrfToken, username, password)) throw new Exception("Authentication error.");
             var ticketJson = await Client.GetStringAsync("https://account.enmasse.com/launcher/1/auth_ticket");
             return (string) JObject.Parse(ticketJson)["ticket"];
         }
@@ -52,14 +53,14 @@ namespace Tera.EnMasse
             return csrfTokenMatch.Groups[1].Value;
         }
 
-        private async Task<bool> TryAuthenticate(string csrfToken, ITeraCredentials credentials)
+        private async Task<bool> TryAuthenticate(string csrfToken, string username, string password)
         {
             var content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
                 {"authenticity_token", csrfToken},
                 {"user[io_black_box]", "."},
-                {"user[email]", credentials.Email},
-                {"user[password]", credentials.Password}
+                {"user[email]", username},
+                {"user[password]", password}
             });
             var response = await Client.PostAsync("https://account.enmasse.com/launcher/1/authenticate", content);
             var authenticationResponse = await response.Content.ReadAsStringAsync();

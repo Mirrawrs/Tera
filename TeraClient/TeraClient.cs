@@ -17,6 +17,7 @@ namespace Tera.Net
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly TeraClientConfiguration configuration;
+        private readonly Action<Exception> exceptionHandler;
         private readonly byte[] inputBuffer = new byte[ushort.MaxValue];
         private readonly byte[] outputBuffer = new byte[ushort.MaxValue];
         private readonly SemaphoreSlim sendingSemaphore = new SemaphoreSlim(1, 1);
@@ -38,6 +39,8 @@ namespace Tera.Net
         {
             configuration = clientConfiguration;
             serializer = new TeraSerializer(new MemoryStream(outputBuffer), configuration);
+            exceptionHandler = configuration.UnhandledExceptionHandler ??
+                               throw new ArgumentNullException(nameof(configuration.UnhandledExceptionHandler));
             dispatcherConfiguration.ModuleTypes.Add(typeof(CoreModule));
             Dispatcher = new Dispatcher(dispatcherConfiguration);
         }
@@ -140,7 +143,7 @@ namespace Tera.Net
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                exceptionHandler(e);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Tera.Net
@@ -31,12 +32,21 @@ namespace Tera.Net
         ///     Gets or sets the dictionary mapping opcodes to packet names.
         /// </summary>
         public IReadOnlyDictionary<ushort, string> PacketNamesByOpcode { get; set; }
-        
+
+        /// <summary>
+        ///     Gets or sets the ordered list of system message types.
+        /// </summary>
         public IList<ISystemMessageTypeInfo> SystemMessageTypes { get; set; }
 
         /// <summary>
         ///     Gets or sets the build version that the client is running on. It must be up to date in order to log in.
         /// </summary>
         public int BuildVersion { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a delegate that is invoked when a component listening to the client's dispatcher throws an exception
+        ///     that isn't user-handled.
+        /// </summary>
+        public Action<Exception> UnhandledExceptionHandler { get; set; }
     }
 }

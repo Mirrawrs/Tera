@@ -5,6 +5,7 @@ A set of tools designed in C# that make interoperation with the game's client an
 * [EnMasseDataProvider](https://github.com/Mirrawrs/Tera/tree/master/EnMasseDataProvider): communicate with EnMasse services and authenticate.
 * [Entities](https://github.com/Mirrawrs/Tera/tree/master/Entities): primitive and complex game-related types.
 * [GameClientAnalyzer](https://github.com/Mirrawrs/Tera/tree/master/GameClientAnalyzer): scan the game client for version-dependent data.
+* [GameClientLauncher](https://github.com/Mirrawrs/Tera/tree/master/GameClientLauncher): start the game client directly with customizable launch parameters.
 * [Interfaces](https://github.com/Mirrawrs/Tera/tree/master/Interfaces): to keep implementations separated from contracts.
 * [SampleBot](https://github.com/Mirrawrs/Tera/tree/master/SampleBot): a simple bot working out of the box, good as a learning reference.
 * [TeraClient](https://github.com/Mirrawrs/Tera/tree/master/TeraClient): the core elements to connect to a TERA server.

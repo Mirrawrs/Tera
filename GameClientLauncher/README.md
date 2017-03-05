@@ -11,6 +11,7 @@ var launcherConfig = new LauncherConfiguration
     TeraLauncherPath = @"C:\Users\Public\Games\En Masse Entertainment\TERA\Client\TL.exe"
 };
 var launcher = new Launcher(launcherConfig);
+await launcher.Start();
 ```
 
 ## How does it work

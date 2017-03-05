@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleBot", "SampleBot\SampleBot.csproj", "{28B61841-47BC-4850-8DA9-EC899E851033}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameClientLauncher", "GameClientLauncher\GameClientLauncher.csproj", "{11185201-ED52-40E7-B49E-91C1B559D1FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{28B61841-47BC-4850-8DA9-EC899E851033}.Release|x64.Build.0 = Release|x64
 		{28B61841-47BC-4850-8DA9-EC899E851033}.Release|x86.ActiveCfg = Release|x86
 		{28B61841-47BC-4850-8DA9-EC899E851033}.Release|x86.Build.0 = Release|x86
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Debug|x64.ActiveCfg = Debug|x64
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Debug|x64.Build.0 = Debug|x64
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Debug|x86.ActiveCfg = Debug|x86
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Debug|x86.Build.0 = Debug|x86
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Release|x64.ActiveCfg = Release|x64
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Release|x64.Build.0 = Release|x64
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Release|x86.ActiveCfg = Release|x86
+		{11185201-ED52-40E7-B49E-91C1B559D1FC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

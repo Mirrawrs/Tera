@@ -6,14 +6,16 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Tera.Launcher;
 
 namespace Tera.EnMasse
 {
     /// <summary>
     ///     Exposes methods to obtain EnMasse's TERA realm list and authentication ticket.
     /// </summary>
-    public class EnMasseDataProvider : IAuthProvider
+    public class EnMasseDataProvider : ILaunchInfoProvider
     {
         private static readonly HttpClient Client = new HttpClient();
 
@@ -23,7 +25,7 @@ namespace Tera.EnMasse
         /// <returns>The list of realms.</returns>
         public async Task<IReadOnlyList<IRealmInfo>> GetRealms()
         {
-            var html = await Client.GetStringAsync("http://sls.service.enmasse.com:8080/servers/list.en");
+            var html = await Client.GetStringAsync(ServerListUri);
             var serializer = new XmlSerializer(typeof(RealmList));
             using (var reader = new StringReader(html))
             {
@@ -44,6 +46,17 @@ namespace Tera.EnMasse
             if (!await TryAuthenticate(csrfToken, username, password)) throw new Exception("Authentication error.");
             var ticketJson = await Client.GetStringAsync("https://account.enmasse.com/launcher/1/auth_ticket");
             return (string) JObject.Parse(ticketJson)["ticket"];
+        }
+
+        public string ServerListUri => "http://sls.service.enmasse.com:8080/servers/list.en";
+
+        public async Task<TeraLaunchInfo> GetTeraLaunchInfo(string username, string password)
+        {
+            var ticket = await Authenticate(username, password);
+            var infoJson = await Client.GetStringAsync("https://account.enmasse.com/launcher/1/account_server_info");
+            var accountServerInfo = JsonConvert.DeserializeObject<TeraLaunchInfo>(infoJson);
+            accountServerInfo.Ticket = ticket;
+            return accountServerInfo;
         }
 
         private async Task<string> GetCsrfToken()
